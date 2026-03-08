@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cyber-db
+spec:
+  serviceName: "cyber-db-hs"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cyber-db
+  template:
+    metadata:
+      labels:
+        app: cyber-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:13
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "secret"
+        ports:
+        - containerPort: 5432
