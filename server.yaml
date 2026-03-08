@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cyber-world-deploy
+  labels:
+    app: cyber-world
+spec:
+  replicas: 3 # On commence avec 1 serveur unique
+  selector:
+    matchLabels:
+      app: cyber-world
+  template:
+    metadata:
+      labels:
+        app: cyber-world
+    spec:
+      containers:
+      - name: game-server
+        image: nginx:1.19 # Simule notre application de jeu
+        ports:
+        - containerPort: 80
